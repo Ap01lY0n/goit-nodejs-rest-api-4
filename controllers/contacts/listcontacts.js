@@ -1,7 +1,7 @@
 const { Contact } = require('../../models');
 
 const listContacts = async ({ user, query }, res) => {
-	const { _id: idUser } = user;
+	try{const { _id: idUser } = user;
 
 	const { page = 1, perPage = 20, favorite } = query;
 	const skip = (page - 1) * perPage;
@@ -17,6 +17,10 @@ const listContacts = async ({ user, query }, res) => {
 			  }).populate('owner', 'name email');
 
 	res.json(data);
+			}catch (error) {
+				console.error(error);
+				res.status(500).json({ message: 'Interna11 Server Error' });
+			  }
 };
 
 module.exports = listContacts;

@@ -1,3 +1,3 @@
 module.exports = {
-  SECRET_KEY: 'eyJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEyMzQ1Njc4IiwiZW1haWwiOiJhcG9sbHlvbkBnbWFpbC5jb20ifQ.gn7enxuJlk4Exi1ygUQU1Ri7iB7TPacXw6a9CjcUpKk',
+  SECRET_KEY: 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNjE3ODc5OSwiaWF0IjoxNzA2MTc4Nzk5fQ.tG14aev_fLh7Yeqb3eZ5mp2yKd0YR4Xyksm6WjLBnlY',
   };

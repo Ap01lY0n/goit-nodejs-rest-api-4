@@ -13,7 +13,7 @@ const { ctrlWrapper } = require('../../utils');
 
 const router = express.Router();
 
-router.get('/', ctrlWrapper(listContacts));
+router.get('/', authenticate, ctrlWrapper(listContacts));
 
 router.get('/:contactId', authenticate, isValidId, ctrlWrapper(getContactById));
 
