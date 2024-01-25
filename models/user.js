@@ -34,10 +34,13 @@ const userRegisterSchema = new Schema(
 	{ versionKey: false, timestamps: true }
 );
 
-userRegisterSchema.post('save', (err, _data, next) => {
-	err.status = 400;
-	next();
-});
+userRegisterSchema.post('save', function (err, _doc, next) {
+	if (err.name === 'MongoError' && err.code === 11000) {
+	  err.status = 400;
+	  err.message = 'Email is already taken';
+	}
+	next(err);
+  });
 
 const registerSchema = Joi.object({
 	name: Joi.string().required(),

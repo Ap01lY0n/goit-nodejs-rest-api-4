@@ -1,15 +1,17 @@
 const { HttpError } = require('../utils');
 
 const validateBody = (schema, message) => {
-	const func = ({ body }, res, next) => {
-		const { error } = schema.validate(body);
+	const func = (req, res, next) => {
+	  if (['POST', 'PUT'].includes(req.method)) {
+		const { error } = schema.validate(req.body);
 		if (error) {
-			next(HttpError(400, message || error.message));
+		  return next(HttpError(400, message || error.message));
 		}
-		next();
+	  }
+	  next();
 	};
-
+  
 	return func;
-};
-
-module.exports = validateBody;
+  };
+  
+  module.exports = validateBody;

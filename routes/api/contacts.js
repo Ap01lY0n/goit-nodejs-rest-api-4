@@ -8,7 +8,7 @@ const {
 	addContact,
 	updateContact,
 	updateContactFavorite,
-} = require('../../controllers');
+} = require('../../controllers/contacts');
 const { ctrlWrapper } = require('../../utils');
 
 const router = express.Router();
