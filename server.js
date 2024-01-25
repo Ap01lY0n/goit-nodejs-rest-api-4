@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const app = require('./app');
-const config = require('./config');
 
-const { DB_HOST, PORT = 3008 } = process.env;
+const { DB_HOST, PORT = 3040 } = process.env;
 mongoose.set('strictQuery', true);
 
-mongoose.connect(config.mongodbURI)
+mongoose.connect(DB_HOST)
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {

@@ -58,20 +58,8 @@ const logout = async ({ user }, res) => {
 	res.status(204).json({});
 };
 
-const getCurrent = async ({ user }, res) => {
-	const { _id: id } = user;
-
-	const currentUser = await User.findOne({ id });
-
-	res.json({
-		email: currentUser.email,
-		subscription: currentUser.subscription,
-	});
-};
-
 module.exports = {
 	register,
 	login,
 	logout,
-	getCurrent,
 };

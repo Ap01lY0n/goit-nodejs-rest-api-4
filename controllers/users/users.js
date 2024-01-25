@@ -14,6 +14,18 @@ const changeSubscription = async ({ user, body }, res) => {
 	});
 };
 
+const getCurrent = async ({ user }, res) => {
+	const { _id: id } = user;
+
+	const currentUser = await User.findOne({ id });
+
+	res.json({
+		email: currentUser.email,
+		subscription: currentUser.subscription,
+	});
+};
+
 module.exports = {
 	changeSubscription,
+	getCurrent
 };

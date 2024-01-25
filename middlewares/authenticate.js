@@ -11,6 +11,13 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
   if (bearer !== 'Bearer') next(HttpError(401));
 
+  const authorizationHeader = req.get('Authorization');
+  
+  if (!authorizationHeader) {
+    return next(HttpError(401, 'Not authorized'));
+  }
+  
+
   try {
     const { id } = jwt.verify(token, SECRET_KEY);
     const user = await User.findById(id);
@@ -20,8 +27,8 @@ const SECRET_KEY = process.env.SECRET_KEY;
     req.user = user;
 
     next();
-  } catch {
-    next(HttpError(401));
+  } catch (error) {
+    return next(HttpError(401, 'Not authorized'));
   }
 };
-module.exports = authenticate; 
+module.exports = authenticate;  

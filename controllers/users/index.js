@@ -1,5 +1,6 @@
-const { changeSubscription } = require('./users.js');
+const { changeSubscription, getCurrent } = require('./users.js');
 
 module.exports = {
 	changeSubscription,
+	getCurrent
 };
