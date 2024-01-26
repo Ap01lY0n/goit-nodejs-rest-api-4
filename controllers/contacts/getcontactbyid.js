@@ -1,13 +1,20 @@
 const { Contact } = require('../../models');
 const { HttpError } = require('../../utils');
 
-const getContactById = async ({ params }, res) => {
-	const { contactId } = params;
-	const data = await Contact.findById(contactId).populate('owner', 'name email');
-	if (!data) {
-		throw HttpError(404, 'Not found');
-	}
-	res.json(data);
+const getContactById = async (req, res) => {
+    const { contactId } = req.params;
+    const { _id: idUser } = req.user;
+  
+    const contact = await Contact.findOne({ _id: contactId, owner: idUser }, '-createdAt -updatedAt').populate(
+        'owner',
+        'name email'
+    );
+  
+    if (!contact) {
+        throw HttpError(404, 'Contact not found');
+    }
+  
+    res.json(contact);
 };
 
 module.exports = getContactById;

@@ -1,13 +1,21 @@
 const { Contact } = require('../../models');
 const { HttpError } = require('../../utils');
 
-const updateContact = async ({ params, body }, res) => {
-	const { contactId } = params;
-	const data = await Contact.findByIdAndUpdate(contactId, body, { new: true });
-	if (!data) {
-		throw HttpError(404, 'Not found');
-	}
-	res.json(data);
+const updateContact = async (req, res) => {
+    const { contactId } = req.params;
+    const { _id: idUser } = req.user;
+  
+    const updatedContact = await Contact.findOneAndUpdate(
+        { _id: contactId, owner: idUser },
+        { ...req.body },
+        { new: true }
+    );
+  
+    if (!updatedContact) {
+        throw HttpError(404, 'Contact not found');
+    }
+  
+    res.json(updatedContact);
 };
 
 module.exports = updateContact;
